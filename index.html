@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dungeon Generation in LootQuest</title>
+    <link href="css/reset.css" rel="stylesheet" />
+    <meta name="author" content="Tanner Rogalsky">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="shortcut icon" href="css/favicon.png" />
+    <link rel="apple-touch-icon" href="css/apple-touch-icon.png" />
+    <!-- Code Prettifier: -->
+<link href="css/highlight.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+    <link href="css/style.css" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,800italic,300,400,800' rel='stylesheet' type='text/css'>    
+
+
+  </head>
+
+  <body>
+  <div class="fallback-message">
+  <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+  <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+  </div>
+    <div id="impress">
+    <div class='step' >
+    
+<h1>Dungeon Generation in LootQuest</h1>
+
+<h2>Tanner Rogalsky</h2>
+
+<p>Unity Developers Meetup, 2014-01</p>
+</div>
+      <div class='step' >
+    
+<h1>3 parts</h1>
+
+<ul>
+<li>How Things Work</li>
+<li>How Things Don&#39;t Work</li>
+<li>How We Might Turn The Latter Things Into Those Better First Things</li>
+</ul>
+</div>
+      <div class='step' >
+    
+<h1>How Things Work</h1>
+</div>
+      <div class='step' >
+    
+<h1>Balance</h1>
+
+<ul>
+<li>Recieving and prioritizing arguments.
+
+<ul>
+<li>Number of rooms, size of rooms.</li>
+<li>How far apart are the rooms.</li>
+<li>How many rooms is the shortest path through the dungeon.</li>
+<li>Can we we have dead ends? How many?</li>
+</ul></li>
+<li>Number of rooms is less important than the shortest path through the dungeon.</li>
+</ul>
+</div>
+      <div class='step' >
+    
+<h3>It Begins With A Seed</h3>
+
+<p><img src="images/construction1.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h3>You Must Choose a Path</h3>
+
+<p><img src="images/construction2.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h3>Follow That Path!</h3>
+
+<p><img src="images/construction3.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h3>Put Down Another Room</h3>
+
+<p><img src="images/construction4.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h3>Do It A Whoooole Bunch</h3>
+
+<p><img src="images/construction5.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h3>Now Paths!</h3>
+
+<p><img src="images/construction6.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h3>Now ... Fewer Paths!</h3>
+
+<p><img src="images/construction7.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h3>Validation</h3>
+
+<p><img src="images/construction8.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h3>In Unity</h3>
+
+<p><img src="images/dungeon_blank2.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h3>I Like That But Can You Make It... More?</h3>
+
+<p><img src="images/dungeon_blank3.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h1>Now Let&#39;s Add Some Data</h1>
+
+<ul>
+<li>Bitmasking</li>
+<li>Encounters</li>
+<li>Loot</li>
+<li>Events</li>
+</ul>
+</div>
+      <div class='step' >
+    
+<h2>Bitmasking</h2>
+
+<p><a href="http://www.angryfishstudios.com/2011/04/adventures-in-bitmasking/">http://www.angryfishstudios.com/2011/04/adventures-in-bitmasking/</a></p>
+</div>
+      <div class='step' >
+    
+<h3>Step 1: Done!</h3>
+
+<p><img src="images/bitmask1.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h3>Step 2: Bit...</h3>
+
+<p><img src="images/bitmask2.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h3>Step 2 ½: ... Mask</h3>
+
+<p><img src="images/bitmask3.png" alt=""></p>
+</div>
+      <div class='step' >
+    <pre><code class='prettyprint csharp'>    public static Dictionary<byte, TileType> mask = new Dictionary<byte, TileType>{
+      {Convert.ToByte("0000", 2), TileType.Empty},
+      {Convert.ToByte("0011", 2), TileType.NorthWest},
+      {Convert.ToByte("0101", 2), TileType.NorthEast},
+      {Convert.ToByte("1010", 2), TileType.SouthWest},
+      {Convert.ToByte("1100", 2), TileType.SouthEast},
+      {Convert.ToByte("0111", 2), TileType.North},
+      {Convert.ToByte("1011", 2), TileType.West},
+      {Convert.ToByte("1101", 2), TileType.East},
+      {Convert.ToByte("1110", 2), TileType.South},
+      {Convert.ToByte("1111", 2), TileType.Inner}
+    };
+</code></pre></div>
+      <div class='step' >
+    
+<h3>Putting It All Together!</h3>
+
+<p><img src="images/dungeon1.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<p><img src="images/dungeon2.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<p><img src="images/dungeon4.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h1>How Things Don&#39;t Work</h1>
+</div>
+      <div class='step' >
+    
+      </div>
+    <script src="js/impress.js"></script>
+    <script>impress().init();</script>
+  </body>
+</html>
+    
