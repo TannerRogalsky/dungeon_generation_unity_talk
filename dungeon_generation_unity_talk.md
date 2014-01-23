@@ -140,5 +140,39 @@ ___
 ___
 
 # How Things Don't Work
+- Turns out that connecting X random dungeons is sort of a hard thing.
+- It's not cheap to fail.
+- Can't really do rooms in other shapes.
+- There's a lot of empty space between rooms.
 
 ---
+
+## Connecting X Random Dungeons
+- Build the main path through all the dungeons first and then populate branches and everything else.
+- Build a coordinate-agnostic node graph first and then place them in cartestian space.
+
+---
+
+## Not Cheap To Fail
+- Fail less.
+- Learning! Remember bad seeds (determinism is amazing).
+- Fail faster.
+
+---
+
+## So Many Rectangles
+- Post-process / Just let the renderer handle it.
+- So much more bitmasking.
+- Have you tried... not being on a grid?
+
+---
+
+## Too Much Empty Space
+> Space is big. You just won't believe how vastly, hugely, mind- bogglingly big it is. I mean, you may think it's a long way down the road to the chemist's, but that's just peanuts to space.
+
+- Fill it with pretty things.
+- Fill it with more dungeon.
+
+---
+
+# Thank You
