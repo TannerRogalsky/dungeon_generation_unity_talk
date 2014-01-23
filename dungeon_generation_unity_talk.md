@@ -26,13 +26,24 @@ Unity Developers Meetup, 2014-01
 
 ---
 
+## Parse The Data
+- Number of rooms, size of rooms.
+- How far apart are the rooms.
+- How many rooms make the shortest path through the dungeon.
+- Can we have deadends? How long are they?
+
+---
+
 ## Balance
 - Recieving and prioritizing arguments.
-  - Number of rooms, size of rooms.
-  - How far apart are the rooms.
-  - How many rooms make the shortest path through the dungeon.
-  - Can we have dead ends? How many?
 - Number of rooms is less important than the shortest path through the dungeon.
+
+---
+
+# Let's Make A Dungeon
+- Number of rooms: 7
+- Critical path length: 6
+- Max deadend length: 1
 
 ---
 
@@ -101,11 +112,6 @@ ___
 
 ### Step 1: Done!
 ![](images/bitmask1.png)
-
-- test
-- foo
-- bar
-- this is a long string two make things toolsk a kslkja lkjsdk adiis sis is
 
 ___
 
