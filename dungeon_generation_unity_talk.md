@@ -21,7 +21,12 @@ Unity Developers Meetup, 2014-01
 
 ---
 
-# Balance
+## Get The Data
+![](images/data.png)
+
+---
+
+## Balance
 - Recieving and prioritizing arguments.
   - Number of rooms, size of rooms.
   - How far apart are the rooms.
@@ -97,10 +102,41 @@ ___
 ### Step 1: Done!
 ![](images/bitmask1.png)
 
+- test
+- foo
+- bar
+- this is a long string two make things toolsk a kslkja lkjsdk adiis sis is
+
 ___
 
 ### Step 2: Bit...
 ![](images/bitmask2.png)
+
+---
+
+```csharp
+public byte TileHash(DungeonTile tile){
+  // the bitmask value accumulator
+  byte hash = 0;
+  // used as the power value
+  // (effect the position of the bit you are flipping)
+  int index = 3;
+  // iterate over every neighbouring tile
+  IEnumerable neibours = this.Parent.GetIterator(tile.X - 1, tile.Y - 1, 3, 3);
+  foreach(DungeonTile adjacent in neibours){
+    // don't look at diagonal tiles
+    if ((tile.X == adjacent.X) ^ (tile.Y == adjacent.Y)){
+      // IntValue is 0 or 1 depend on if the tile has been "set"
+      int tileValue = adjacent.IntValue;
+      byte adjacentValue = (byte) (tileValue * Math.Pow(2, index));
+      // accumulate you bitmask value and change your bit position
+      hash += adjacentValue;
+      index--;
+    }
+  }
+  return hash;
+}
+```
 
 ___
 
@@ -110,18 +146,18 @@ ___
 ---
 
 ```csharp
-    public static Dictionary<byte, TileType> mask = new Dictionary<byte, TileType>{
-      {Convert.ToByte("0000", 2), TileType.Empty},
-      {Convert.ToByte("0011", 2), TileType.NorthWest},
-      {Convert.ToByte("0101", 2), TileType.NorthEast},
-      {Convert.ToByte("1010", 2), TileType.SouthWest},
-      {Convert.ToByte("1100", 2), TileType.SouthEast},
-      {Convert.ToByte("0111", 2), TileType.North},
-      {Convert.ToByte("1011", 2), TileType.West},
-      {Convert.ToByte("1101", 2), TileType.East},
-      {Convert.ToByte("1110", 2), TileType.South},
-      {Convert.ToByte("1111", 2), TileType.Inner}
-    };
+public static Dictionary<byte, TileType> mask = new Dictionary<byte, TileType>{
+  {Convert.ToByte("0000", 2), TileType.Empty},
+  {Convert.ToByte("0011", 2), TileType.NorthWest},
+  {Convert.ToByte("0101", 2), TileType.NorthEast},
+  {Convert.ToByte("1010", 2), TileType.SouthWest},
+  {Convert.ToByte("1100", 2), TileType.SouthEast},
+  {Convert.ToByte("0111", 2), TileType.North},
+  {Convert.ToByte("1011", 2), TileType.West},
+  {Convert.ToByte("1101", 2), TileType.East},
+  {Convert.ToByte("1110", 2), TileType.South},
+  {Convert.ToByte("1111", 2), TileType.Inner}
+};
 ```
 
 ___
