@@ -25,8 +25,8 @@ Unity Developers Meetup, 2014-01
 - Recieving and prioritizing arguments.
   - Number of rooms, size of rooms.
   - How far apart are the rooms.
-  - How many rooms is the shortest path through the dungeon.
-  - Can we we have dead ends? How many?
+  - How many rooms make the shortest path through the dungeon.
+  - Can we have dead ends? How many?
 - Number of rooms is less important than the shortest path through the dungeon.
 
 ---
@@ -142,7 +142,7 @@ ___
 # How Things Don't Work
 - Turns out that connecting X random dungeons is sort of a hard thing.
 - It's not cheap to fail.
-- Can't really do rooms in other shapes.
+- Can't really make rooms in other shapes.
 - There's a lot of empty space between rooms.
 
 ---
