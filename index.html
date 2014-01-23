@@ -50,7 +50,13 @@
 </div>
       <div class='step' >
     
-<h1>Balance</h1>
+<h2>Get The Data</h2>
+
+<p><img src="images/data.png" alt=""></p>
+</div>
+      <div class='step' >
+    
+<h2>Balance</h2>
 
 <ul>
 <li>Recieving and prioritizing arguments.
@@ -146,6 +152,13 @@
 <h3>Step 1: Done!</h3>
 
 <p><img src="images/bitmask1.png" alt=""></p>
+
+<ul>
+<li>test</li>
+<li>foo</li>
+<li>bar</li>
+<li>this is a long string two make things toolsk a kslkja lkjsdk adiis sis is</li>
+</ul>
 </div>
       <div class='step' >
     
@@ -154,24 +167,47 @@
 <p><img src="images/bitmask2.png" alt=""></p>
 </div>
       <div class='step' >
+    <pre><code class='prettyprint csharp'>public byte TileHash(DungeonTile tile){
+  // the bitmask value accumulator
+  byte hash = 0;
+  // used as the power value
+  // (effect the position of the bit you are flipping)
+  int index = 3;
+  // iterate over every neighbouring tile
+  IEnumerable neibours = this.Parent.GetIterator(tile.X - 1, tile.Y - 1, 3, 3);
+  foreach(DungeonTile adjacent in neibours){
+    // don't look at diagonal tiles
+    if ((tile.X == adjacent.X) ^ (tile.Y == adjacent.Y)){
+      // IntValue is 0 or 1 depend on if the tile has been "set"
+      int tileValue = adjacent.IntValue;
+      byte adjacentValue = (byte) (tileValue * Math.Pow(2, index));
+      // accumulate you bitmask value and change your bit position
+      hash += adjacentValue;
+      index--;
+    }
+  }
+  return hash;
+}
+</code></pre></div>
+      <div class='step' >
     
 <h3>Step 2 ½: ... Mask</h3>
 
 <p><img src="images/bitmask3.png" alt=""></p>
 </div>
       <div class='step' >
-    <pre><code class='prettyprint csharp'>    public static Dictionary<byte, TileType> mask = new Dictionary<byte, TileType>{
-      {Convert.ToByte("0000", 2), TileType.Empty},
-      {Convert.ToByte("0011", 2), TileType.NorthWest},
-      {Convert.ToByte("0101", 2), TileType.NorthEast},
-      {Convert.ToByte("1010", 2), TileType.SouthWest},
-      {Convert.ToByte("1100", 2), TileType.SouthEast},
-      {Convert.ToByte("0111", 2), TileType.North},
-      {Convert.ToByte("1011", 2), TileType.West},
-      {Convert.ToByte("1101", 2), TileType.East},
-      {Convert.ToByte("1110", 2), TileType.South},
-      {Convert.ToByte("1111", 2), TileType.Inner}
-    };
+    <pre><code class='prettyprint csharp'>public static Dictionary<byte, TileType> mask = new Dictionary<byte, TileType>{
+  {Convert.ToByte("0000", 2), TileType.Empty},
+  {Convert.ToByte("0011", 2), TileType.NorthWest},
+  {Convert.ToByte("0101", 2), TileType.NorthEast},
+  {Convert.ToByte("1010", 2), TileType.SouthWest},
+  {Convert.ToByte("1100", 2), TileType.SouthEast},
+  {Convert.ToByte("0111", 2), TileType.North},
+  {Convert.ToByte("1011", 2), TileType.West},
+  {Convert.ToByte("1101", 2), TileType.East},
+  {Convert.ToByte("1110", 2), TileType.South},
+  {Convert.ToByte("1111", 2), TileType.Inner}
+};
 </code></pre></div>
       <div class='step' >
     
